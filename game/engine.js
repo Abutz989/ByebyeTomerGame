@@ -8,20 +8,21 @@ import ASSETS from './assets.js';
 
 export default class Engine {
   constructor(canvas, ctx) {
-    this.canvas = canvas;
-    this.ctx = ctx;
-    this.input = new Input(canvas, this);
-    this.path = new ZumaPath();
-    this.chain = new Chain(this.path);
-    this.shooter = new Shooter(this);
-    this.gameOver = false;
-    this.victory = false;
+  this.canvas = canvas;
+  this.ctx = ctx;
+  this.input = new Input(canvas, this);
+  this.path = new ZumaPath();
+  this.chain = new Chain(this.path);
+  this.shooter = new Shooter(this);
+  this.gameOver = false;
+  this.victory = false;
 
-    Sound.preload();
-
+  Sound.preload();
+  ASSETS.preload().then(() => {  // ✅ Wait for images
     this.lastTime = 0;
     requestAnimationFrame(this.loop.bind(this));
-  }
+  });
+}
 
   reset() {
     this.chain = new Chain(this.path);

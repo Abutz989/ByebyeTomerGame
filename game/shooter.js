@@ -41,8 +41,8 @@ export default class Shooter {
     this.projectiles.push(projectile);
 
     // Squash-stretch animation
-    const shooterImg = document.querySelector('#shooterImg');
-    if (shooterImg) shooterImg.style.animation = 'squash 0.2s';
+    // const shooterImg = document.querySelector('#shooterImg');
+    // if (shooterImg) shooterImg.style.animation = 'squash 0.2s';
   }
 
   update(dt) {
@@ -58,7 +58,7 @@ export default class Shooter {
         // Simple path collision
         const distFromCenter = Math.hypot(p.x - this.engine.canvas.width/2, p.y - this.engine.canvas.height/2);
         if (distFromCenter < 200 || p.life <= 0) {
-          const progress = this.engine.path.getPointAlongRay(p.x, p.y);
+          const progress = this.engine.path.getPointAlongRay(p.x, p.y, this.engine.canvas.width, this.engine.canvas.height);
           this.engine.chain.insert({color: p.color}, progress * this.engine.path.getTotalLength());
           this.projectiles.splice(i,1);
         }
@@ -71,9 +71,8 @@ export default class Shooter {
     const cy = ctx.canvas.height / 2;
     this.angle = this.engine.input?.angle || this.currentAimAngle();
 
-    const img = new Image();
-    img.src = ASSETS.shooter;
-    img.id = 'shooterImg';
+    const img = ASSETS.getImage(ASSETS.shooter);
+     img.id = 'shooterImg';
     const scale = 1 + Math.sin(this.bouncePhase) * 0.07;
     ctx.save();
     ctx.translate(cx, cy);
@@ -83,8 +82,7 @@ export default class Shooter {
     ctx.restore();
 
     // Next ball preview
-    const nextImg = new Image();
-    nextImg.src = ASSETS.heads[this.queue[0]];
+    const nextImg = ASSETS.getImage(ASSETS.heads[this.queue[0]]);
     ctx.drawImage(nextImg, cx + 60, cy - 30, 40, 40);
   }
 }

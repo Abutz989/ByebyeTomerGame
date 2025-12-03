@@ -34,4 +34,20 @@ export default class ZumaPath {
                                    : ctx.lineTo(p.x + ctx.canvas.width/2, p.y + ctx.canvas.height/2));
     ctx.stroke();
   }
+
+  getPointAlongRay(x, y, canvasWidth, canvasHeight) {
+  const steps = 300;
+  let closest = 0;
+  let minDist = Infinity;
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const angle = t * Math.PI * 6;
+    const radius = t * 300;
+    const px = radius * Math.cos(angle) + canvasWidth/2;
+    const py = radius * Math.sin(angle) + canvasHeight/2;
+    const d = Math.hypot(px - x, py - y);
+    if (d < minDist) { minDist = d; closest = t; }
+  }
+  return closest;
+}
 }

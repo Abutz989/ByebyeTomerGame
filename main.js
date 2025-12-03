@@ -11,4 +11,4 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
-new Engine(canvas, ctx);
+window.engine = new Engine(canvas, ctx);  // Expose engine for debugging

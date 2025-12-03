@@ -54,9 +54,8 @@ export default class Chain {
       const point = this.path.getPoint(head.distance / this.path.getTotalLength());
       if (!point) return;
 
-      const img = new Image();
-      img.src = ASSETS.heads[head.color];
-      ctx.drawImage(img,
+      const img = ASSETS.getImage(ASSETS.heads[head.color]);
+      if (img) ctx.drawImage(img,
         point.x + offsetX - HEAD_SIZE/2,
         point.y + offsetY - HEAD_SIZE/2,
         HEAD_SIZE, HEAD_SIZE
