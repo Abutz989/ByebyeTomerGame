@@ -1,4 +1,3 @@
-// main.js
 import Engine from './game/engine.js';
 
 const canvas = document.getElementById('gameCanvas');

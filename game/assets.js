@@ -1,10 +1,12 @@
 // game/assets.js
-// game/assets.js
 const ASSETS = {
   heads: {
     red:    "assets/heads/head_red.png",
     green:  "assets/heads/head_green.png",
-    blue:   "assets/heads/head_blue.png"
+    blue:   "assets/heads/head_blue.png",
+    // Added new colors (ensure you have these images or duplicate existing ones to test)
+    yellow: "assets/heads/head_yellow.png",
+    purple: "assets/heads/head_purple.png"
   },
   shooter:  "assets/shooter.png",
   win:      "assets/win.png",
@@ -16,7 +18,6 @@ const ASSETS = {
     lose:   "assets/sounds/lose.wav"
   },
   
-  // Add loaded images cache
   _loaded: {},
   
   preload() {
@@ -35,7 +36,11 @@ const ASSETS = {
         this._loaded[src] = img;
         resolve(img);
       };
-      img.onerror = () => resolve(null); // Handle missing images
+      // If image missing, resolve null so game doesn't crash
+      img.onerror = () => {
+        console.warn(`Failed to load: ${src}`);
+        resolve(null); 
+      }; 
       img.src = src;
     });
   },

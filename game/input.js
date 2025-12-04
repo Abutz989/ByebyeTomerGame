@@ -2,7 +2,9 @@
 export default class Input {
   constructor(canvas, engine) {
     this.engine = engine;
+    // engine.input = this;
     this.angle = 0;
+   
 
     const updateAngle = (clientX, clientY) => {
       const rect = canvas.getBoundingClientRect();
@@ -31,6 +33,6 @@ export default class Input {
     });
 
     // Keep reference for shooter
-    engine.shooter.currentAimAngle = () => this.angle;
+    // engine.shooter.currentAimAngle = () => this.angle;
   }
 }

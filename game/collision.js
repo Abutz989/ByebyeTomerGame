@@ -1,11 +1,9 @@
 // game/collision.js
+// Logic moved to Chain class to handle physics better.
+// Keeping this function as a proxy if other files import it.
 export function insertProjectile(chain, newHead, targetDistance) {
-  let insertIndex = 0;
-  for (let i = chain.length - 1; i >= 0; i--) {
-    if (chain[i].distance <= targetDistance) {
-      insertIndex = i + 1;
-      break;
-    }
-  }
-  chain.splice(insertIndex, 0, { ...newHead, distance: targetDistance });
+  // This helper is deprecated in favor of chain.insert directly, 
+  // but we keep it to prevent breaking imports if any.
+  // The logic inside chain.insert handles the array splicing.
+  console.warn("Using deprecated insertProjectile wrapper");
 }
